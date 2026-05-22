@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="vi" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+  <style>
+    * { font-family: 'Outfit', sans-serif; }
+    @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+    @keyframes pulse-glow { 0%,100%{box-shadow:0 0 20px rgba(168,85,247,0.4)} 50%{box-shadow:0 0 40px rgba(168,85,247,0.7)} }
+    @keyframes spin-slow { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+    @keyframes fade-up { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+    .float-anim { animation: float 3s ease-in-out infinite; }
+    .glow { animation: pulse-glow 2s ease-in-out infinite; }
+    .spin-slow { animation: spin-slow 20s linear infinite; }
+    .fade-up { animation: fade-up 0.6s ease forwards; opacity:0; }
+    .link-card { transition: all 0.3s cubic-bezier(0.4,0,0.2,1); }
+    .link-card:hover { transform: translateY(-3px) scale(1.02); }
+    .music-bar { animation: music-bounce 0.8s ease-in-out infinite alternate; }
+    .music-bar:nth-child(2) { animation-delay: 0.2s; }
+    .music-bar:nth-child(3) { animation-delay: 0.4s; }
+    .music-bar:nth-child(4) { animation-delay: 0.1s; }
+    @keyframes music-bounce { 0%{height:4px} 100%{height:16px} }
+    .vinyl { animation: spin-slow 4s linear infinite; animation-play-state: paused; }
+    .vinyl.playing { animation-play-state: running; }
+  </style>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full">
+  <div id="app" class="h-full w-full overflow-auto" style="background: linear-gradient(135deg, #0f0f1a 0%, #1a1025 40%, #0d1117 100%);">
+   <!-- Decorative orbs -->
+   <div class="fixed top-10 left-10 w-64 h-64 rounded-full opacity-20 spin-slow" style="background: radial-gradient(circle, #a855f7, transparent 70%);"></div>
+   <div class="fixed bottom-10 right-10 w-48 h-48 rounded-full opacity-15 spin-slow" style="background: radial-gradient(circle, #06b6d4, transparent 70%); animation-direction: reverse;"></div>
+   <div class="relative z-10 flex flex-col items-center px-4 py-12 max-w-md mx-auto">
+    <!-- Avatar -->
+    <div class="fade-up" style="animation-delay:0.1s">
+     <div class="relative">
+      <div class="w-28 h-28 rounded-full glow flex items-center justify-center text-5xl" style="background: linear-gradient(135deg, #a855f7, #06b6d4);">
+       ✦
+      </div>
+      <div class="absolute -bottom-1 -right-1 w-8 h-8 bg-green-400 rounded-full border-4 border-[#0f0f1a]"></div>
+     </div>
+    </div><!-- Name & Bio -->
+    <h1 id="el-name" class="fade-up mt-5 text-2xl font-bold text-white" style="animation-delay:0.2s">Minh Anh</h1>
+    <p id="el-bio" class="fade-up mt-2 text-gray-400 text-center text-sm leading-relaxed max-w-xs" style="animation-delay:0.3s">Creative designer &amp; music lover 🎵 Based in Saigon 🌆</p><!-- Music Player -->
+    <div class="fade-up mt-6 w-full rounded-2xl p-4 flex items-center gap-3" style="animation-delay:0.35s; background: rgba(168,85,247,0.1); border: 1px solid rgba(168,85,247,0.25);">
+     <button id="play-btn" onclick="toggleMusic()" class="w-12 h-12 rounded-full flex items-center justify-center shrink-0 hover:scale-110 transition-transform" style="background: linear-gradient(135deg, #a855f7, #7c3aed);"> <i data-lucide="play" class="w-5 h-5 text-white" id="play-icon"></i> </button>
+     <div class="flex-1 min-w-0">
+      <p class="text-white text-sm font-medium truncate">Lofi Chill Beats</p>
+      <p class="text-gray-500 text-xs">Ambient vibes ♪</p>
+     </div>
+     <div id="music-bars" class="flex items-end gap-[3px] h-5 opacity-0 transition-opacity">
+      <div class="music-bar w-[3px] bg-purple-400 rounded-full"></div>
+      <div class="music-bar w-[3px] bg-purple-400 rounded-full"></div>
+      <div class="music-bar w-[3px] bg-cyan-400 rounded-full"></div>
+      <div class="music-bar w-[3px] bg-purple-400 rounded-full"></div>
+     </div>
+    </div><!-- Links -->
+    <div class="mt-6 w-full space-y-3">
+     <a id="el-link-1" class="fade-up link-card block w-full rounded-xl p-4 text-center text-white font-medium text-sm" style="animation-delay:0.4s; background: rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); backdrop-filter:blur(10px);" href="#" target="_blank" rel="noopener noreferrer"> <span class="flex items-center justify-center gap-2"><i data-lucide="facebook" class="w-4 h-4"></i> Facebook</span> </a> <a id="el-link-2" class="fade-up link-card block w-full rounded-xl p-4 text-center text-white font-medium text-sm" style="animation-delay:0.5s; background: rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); backdrop-filter:blur(10px);" href="#" target="_blank" rel="noopener noreferrer"> <span class="flex items-center justify-center gap-2"><i data-lucide="headphones" class="w-4 h-4"></i> Discord</span> </a>
+    </div><!-- Footer -->
+    <p class="fade-up mt-10 text-gray-600 text-xs" style="animation-delay:0.8s">made with ♥</p>
+   </div>
+  </div>
+  <script>
+  // Audio
+  let audioCtx, oscillator, gainNode, isPlaying = false;
+
+  function toggleMusic() {
+    if (!audioCtx) {
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      // Create a simple lofi-ish ambient tone
+      oscillator = audioCtx.createOscillator();
+      gainNode = audioCtx.createGain();
+      const filter = audioCtx.createBiquadFilter();
+      filter.type = 'lowpass';
+      filter.frequency.value = 800;
+      oscillator.type = 'sine';
+      oscillator.frequency.value = 220;
+      gainNode.gain.value = 0.15;
+      oscillator.connect(filter);
+      filter.connect(gainNode);
+      gainNode.connect(audioCtx.destination);
+      oscillator.start();
+      // Add a second oscillator for harmony
+      const osc2 = audioCtx.createOscillator();
+      osc2.type = 'triangle';
+      osc2.frequency.value = 330;
+      const g2 = audioCtx.createGain();
+      g2.gain.value = 0.08;
+      osc2.connect(filter);
+      osc2.start();
+    }
+    if (isPlaying) {
+      gainNode.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 0.3);
+      isPlaying = false;
+    } else {
+      gainNode.gain.linearRampToValueAtTime(0.15, audioCtx.currentTime + 0.3);
+      isPlaying = true;
+    }
+    document.getElementById('music-bars').style.opacity = isPlaying ? '1' : '0';
+    document.getElementById('play-icon').setAttribute('data-lucide', isPlaying ? 'pause' : 'play');
+    lucide.createIcons();
+  }
+
+  // Element SDK
+  const defaultConfig = {
+    display_name: 'Nguyễn Văn Khắc',
+    bio_text: 'Khắc',
+    link_1_text: 'Facebook',
+    link_2_text: 'Discord',
+    primary_color: '#a855f7',
+    surface_color: '#1a1025',
+    text_color: '#ffffff',
+    accent_color: '#06b6d4',
+    muted_color: '#9ca3af',
+    font_family: 'Outfit',
+    font_size: 14
+  };
+
+  const iconMap = { 1: 'facebook', 2: 'headphones' };
+
+  function applyConfig(config) {
+    document.getElementById('el-name').textContent = config.display_name || defaultConfig.display_name;
+    document.getElementById('el-bio').textContent = config.bio_text || defaultConfig.bio_text;
+    for (let i = 1; i <= 2; i++) {
+      const el = document.getElementById(`el-link-${i}`);
+      const text = config[`link_${i}_text`] || defaultConfig[`link_${i}_text`];
+      el.querySelector('span').innerHTML = `<i data-lucide="${iconMap[i]}" class="w-4 h-4"></i> ${text}`;
+    }
+    // Colors
+    const pc = config.primary_color || defaultConfig.primary_color;
+    const tc = config.text_color || defaultConfig.text_color;
+    document.getElementById('el-name').style.color = tc;
+    document.getElementById('el-bio').style.color = config.muted_color || defaultConfig.muted_color;
+    // Font
+    const ff = config.font_family || defaultConfig.font_family;
+    document.body.style.fontFamily = `${ff}, Outfit, sans-serif`;
+    const fs = config.font_size || defaultConfig.font_size;
+    document.getElementById('el-bio').style.fontSize = `${fs}px`;
+    document.getElementById('el-name').style.fontSize = `${fs * 1.7}px`;
+
+    lucide.createIcons();
+  }
+
+  window.elementSdk.init({
+    defaultConfig,
+    onConfigChange: async (config) => applyConfig(config),
+    mapToCapabilities: (config) => ({
+      recolorables: [
+        { get: () => config.surface_color || defaultConfig.surface_color, set: (v) => { config.surface_color = v; window.elementSdk.setConfig({ surface_color: v }); } },
+        { get: () => config.muted_color || defaultConfig.muted_color, set: (v) => { config.muted_color = v; window.elementSdk.setConfig({ muted_color: v }); } },
+        { get: () => config.text_color || defaultConfig.text_color, set: (v) => { config.text_color = v; window.elementSdk.setConfig({ text_color: v }); } },
+        { get: () => config.primary_color || defaultConfig.primary_color, set: (v) => { config.primary_color = v; window.elementSdk.setConfig({ primary_color: v }); } },
+        { get: () => config.accent_color || defaultConfig.accent_color, set: (v) => { config.accent_color = v; window.elementSdk.setConfig({ accent_color: v }); } }
+      ],
+      borderables: [],
+      fontEditable: { get: () => config.font_family || defaultConfig.font_family, set: (v) => { config.font_family = v; window.elementSdk.setConfig({ font_family: v }); } },
+      fontSizeable: { get: () => config.font_size || defaultConfig.font_size, set: (v) => { config.font_size = v; window.elementSdk.setConfig({ font_size: v }); } }
+    }),
+    mapToEditPanelValues: (config) => new Map([
+      ['display_name', config.display_name || defaultConfig.display_name],
+      ['bio_text', config.bio_text || defaultConfig.bio_text],
+      ['link_1_text', config.link_1_text || defaultConfig.link_1_text],
+      ['link_2_text', config.link_2_text || defaultConfig.link_2_text]
+    ])
+  });
+
+  lucide.createIcons();
+</script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9ffd4858af9b9590',t:'MTc3OTQ2ODIzNQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
