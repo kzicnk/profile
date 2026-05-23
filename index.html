@@ -1,1 +1,562 @@
 <!DOCTYPE html>
+<html lang="vi">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport"
+  content="width=device-width, initial-scale=1.0">
+
+  <title>Anime Profile</title>
+
+  <link rel="preconnect"
+  href="https://fonts.googleapis.com">
+
+  <link rel="preconnect"
+  href="https://fonts.gstatic.com"
+  crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap"
+  rel="stylesheet">
+
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:'Poppins',sans-serif;
+    }
+
+    body{
+
+      background:
+      linear-gradient(135deg,#0a0f1f,#111827,#1e293b);
+
+      min-height:100vh;
+
+      display:flex;
+
+      justify-content:center;
+
+      align-items:center;
+
+      overflow-x:hidden;
+
+      color:white;
+
+      padding:20px;
+
+    }
+
+    .bg{
+
+      position:fixed;
+
+      inset:0;
+
+      background:
+
+      radial-gradient(circle at top left,#7dd3fc30,transparent 25%),
+
+      radial-gradient(circle at bottom right,#60a5fa25,transparent 25%),
+
+      radial-gradient(circle at center,#ffffff08,transparent 30%);
+
+      z-index:-1;
+
+    }
+
+    /* START SCREEN */
+
+    .music-start{
+
+      position:fixed;
+
+      inset:0;
+
+      background:#000000ee;
+
+      display:flex;
+
+      justify-content:center;
+
+      align-items:center;
+
+      z-index:999;
+
+      transition:1s;
+
+    }
+
+    .play-btn{
+
+      padding:22px 55px;
+
+      border:none;
+
+      border-radius:60px;
+
+      font-size:28px;
+
+      font-weight:700;
+
+      color:white;
+
+      cursor:pointer;
+
+      background:
+      linear-gradient(90deg,#38bdf8,#60a5fa);
+
+      box-shadow:
+      0 0 35px #38bdf8;
+
+      transition:0.3s;
+
+    }
+
+    .play-btn:hover{
+
+      transform:scale(1.05);
+
+    }
+
+    /* MAIN */
+
+    .container{
+
+      width:100%;
+
+      max-width:680px;
+
+      background:rgba(15,23,42,0.75);
+
+      backdrop-filter:blur(15px);
+
+      border-radius:35px;
+
+      border:1px solid rgba(255,255,255,0.06);
+
+      box-shadow:
+      0 0 35px rgba(96,165,250,0.15);
+
+      padding:40px 28px;
+
+      text-align:center;
+
+      opacity:0;
+
+      transform:translateY(25px);
+
+      transition:1s;
+
+    }
+
+    .show{
+
+      opacity:1;
+
+      transform:translateY(0);
+
+    }
+
+    /* AVATAR */
+
+    .avatar{
+
+      width:150px;
+
+      height:150px;
+
+      border-radius:50%;
+
+      object-fit:cover;
+
+      border:4px solid #93c5fd;
+
+      box-shadow:
+      0 0 25px #60a5fa,
+      0 0 60px #38bdf8;
+
+    }
+
+    /* NAME */
+
+    h1{
+
+      margin-top:18px;
+
+      font-size:42px;
+
+      color:#dbeafe;
+
+      text-shadow:
+      0 0 10px #60a5fa;
+
+    }
+
+    .bio{
+
+      margin-top:14px;
+
+      color:#cbd5e1;
+
+      font-size:18px;
+
+      line-height:1.8;
+
+    }
+
+    /* SECTION */
+
+    .title{
+
+      margin-top:42px;
+
+      font-size:38px;
+
+      font-weight:700;
+
+      color:#93c5fd;
+
+      text-shadow:
+      0 0 12px #38bdf8;
+
+    }
+
+    .line{
+
+      width:90px;
+
+      height:5px;
+
+      border-radius:20px;
+
+      background:#60a5fa;
+
+      margin:10px auto 30px;
+
+      box-shadow:
+      0 0 15px #38bdf8;
+
+    }
+
+    /* SOCIAL */
+
+    .socials{
+
+      display:flex;
+
+      flex-direction:column;
+
+      gap:18px;
+
+    }
+
+    .social-btn{
+
+      background:rgba(255,255,255,0.05);
+
+      border:1px solid rgba(147,197,253,0.12);
+
+      padding:22px;
+
+      border-radius:18px;
+
+      color:white;
+
+      text-decoration:none;
+
+      font-size:22px;
+
+      transition:0.3s;
+
+      box-shadow:
+      0 0 15px rgba(96,165,250,0.08);
+
+    }
+
+    .social-btn:hover{
+
+      background:rgba(96,165,250,0.14);
+
+      transform:translateY(-4px);
+
+      box-shadow:
+      0 0 25px rgba(96,165,250,0.25);
+
+    }
+
+    /* BANK */
+
+    .bank-box{
+
+      margin-top:35px;
+
+      background:rgba(255,255,255,0.04);
+
+      border:1px solid rgba(147,197,253,0.08);
+
+      border-radius:22px;
+
+      padding:28px;
+
+      text-align:left;
+
+      box-shadow:
+      0 0 20px rgba(96,165,250,0.08);
+
+    }
+
+    .bank-item{
+
+      margin-bottom:18px;
+
+      font-size:20px;
+
+      line-height:1.8;
+
+      cursor:pointer;
+
+      transition:0.3s;
+
+    }
+
+    .bank-item:hover{
+
+      color:#93c5fd;
+
+    }
+
+    /* TOAST */
+
+    .toast{
+
+      position:fixed;
+
+      bottom:30px;
+
+      left:50%;
+
+      transform:translateX(-50%);
+
+      background:#0f172acc;
+
+      border:1px solid rgba(147,197,253,0.1);
+
+      padding:15px 28px;
+
+      border-radius:40px;
+
+      backdrop-filter:blur(10px);
+
+      font-size:17px;
+
+      opacity:0;
+
+      transition:0.4s;
+
+    }
+
+    .show-toast{
+
+      opacity:1;
+
+    }
+
+    @media(max-width:600px){
+
+      .container{
+        padding:30px 20px;
+      }
+
+      h1{
+        font-size:34px;
+      }
+
+      .title{
+        font-size:30px;
+      }
+
+      .social-btn{
+        font-size:20px;
+      }
+
+      .bank-item{
+        font-size:17px;
+      }
+
+      .play-btn{
+        font-size:22px;
+        padding:18px 40px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+<div class="bg"></div>
+
+<!-- START SCREEN -->
+
+<div class="music-start"
+id="start">
+
+  <button class="play-btn"
+  onclick="startWebsite()">
+
+    Click để phát nhạc
+
+  </button>
+
+</div>
+
+<!-- MAIN WEBSITE -->
+
+<div class="container"
+id="main">
+
+  <!-- AVATAR -->
+
+  <img class="avatar"
+  src="./1000050531.webp">
+
+  <!-- NAME -->
+
+  <h1>Your Name</h1>
+
+  <!-- BIO -->
+
+  <div class="bio">
+
+    Hi, I'm a Developer<br>
+
+    Website Design<br>
+
+    __Khac__
+
+  </div>
+
+  <!-- SOCIAL -->
+
+  <div class="title">
+
+    Mạng Xã Hội
+
+  </div>
+
+  <div class="line"></div>
+
+  <div class="socials">
+
+    <a class="social-btn"
+    href="https://facebook.com/nguyen.van.khac.770747"
+    target="_blank">
+
+      Facebook
+
+    </a>
+
+    <a class="social-btn"
+    href="https://discord.com/users/1119111125385097236"
+    target="_blank">
+
+      Discord
+
+    </a>
+
+  </div>
+
+  <!-- BANK -->
+
+  <div class="title">
+
+    Thông Tin Bank
+
+  </div>
+
+  <div class="line"></div>
+    <div class="bank-item"
+    onclick="copyText('1064707231')">
+
+      🏦 VIETCOMEBANK: 1064707231 - NGUYEN VAN KHAC
+
+    </div>
+
+  </div>
+
+</div>
+
+<!-- MUSIC -->
+
+<audio id="music"
+loop>
+
+  <source
+  src="./Bông Hoa Chẳng Tồn Tại RIN Music Remix Huy Vạc Em Hãy Quay Về Để Anh Thôi Nhớ Mong Hot TikTok.mp3"
+  type="audio/mpeg">
+
+</audio>
+
+<!-- TOAST -->
+
+<div class="toast"
+id="toast">
+
+  Đã sao chép vào bộ nhớ tạm
+
+</div>
+
+<script>
+
+  const start =
+  document.getElementById("start");
+
+  const main =
+  document.getElementById("main");
+
+  const music =
+  document.getElementById("music");
+
+  function startWebsite(){
+
+    music.play();
+
+    start.style.opacity = "0";
+
+    setTimeout(() => {
+
+      start.style.display = "none";
+
+      main.classList.add("show");
+
+    },800);
+
+  }
+
+  function copyText(text){
+
+    navigator.clipboard.writeText(text);
+
+    const toast =
+    document.getElementById("toast");
+
+    toast.classList.add("show-toast");
+
+    setTimeout(() => {
+
+      toast.classList.remove("show-toast");
+
+    },2000);
+
+  }
+
+</script>
+
+</body>
+</html>
