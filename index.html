@@ -11,29 +11,157 @@
 
     <title>Nguyễn Văn Khắc</title>
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="./css/index.css">
+    <!-- CSS Nội Bộ (Đã tích hợp sẵn để bạn không cần tạo file css riêng nếu chưa có) -->
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            padding: 20px;
+        }
+
+        .profile-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 40px 30px;
+            border-radius: 20px;
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 4px solid #00f2fe;
+            object-fit: cover;
+            margin-bottom: 20px;
+            box-shadow: 0 0 20px rgba(0, 242, 254, 0.5);
+        }
+
+        .name {
+            font-family: 'Pattaya', sans-serif;
+            font-size: 2rem;
+            margin-bottom: 5px;
+            letter-spacing: 1px;
+            background: linear-gradient(to right, #00f2fe, #4facfe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .job {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #bdc3c7;
+            margin-bottom: 25px;
+        }
+
+        .links-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .link-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .link-item:hover {
+            background: #4facfe;
+            border-color: #00f2fe;
+            transform: scale(1.03);
+            box-shadow: 0 5px 15px rgba(79, 172, 254, 0.4);
+        }
+
+        .link-item i {
+            font-size: 1.2rem;
+        }
+
+        .footer-text {
+            margin-top: 30px;
+            font-size: 0.8rem;
+            color: #7f8c8d;
+        }
+    </style>
 
     <!-- Bootstrap Icons -->
-    <link rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
 
     <!-- Google Fonts -->
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Pattaya|Quicksand">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Pattaya|Quicksand">
 
     <!-- SweetAlert2 -->
-    <link rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css">
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-    <meta name="msapplication-TileColor" content="#ffffff">
 </head>
 
 <body>
 
-    <!-- Nội dung web ở đây -->
+    <div class="profile-card">
+        <!-- Ảnh đại diện: Bạn thay đường dẫn ảnh của bạn vào chỗ href hoặc src nhé -->
+        <img src="https://via.placeholder.com/150" alt="Nguyễn Văn Khắc" class="avatar" id="avatarClick">
+        
+        <h1 class="name">Nguyễn Văn Khắc</h1>
+        <p class="job">Developer / Student</p>
+
+        <!-- Các nút liên kết mạng xã hội -->
+        <div class="links-container">
+            <a href="https://facebook.com" target="_blank" class="link-item">
+                <i class="bi bi-facebook"></i> Facebook của tôi
+            </a>
+            <a href="https://github.com" target="_blank" class="link-item">
+                <i class="bi bi-github"></i> GitHub cá nhân
+            </a>
+            <a href="mailto:example@gmail.com" class="link-item">
+                <i class="bi bi-envelope-fill"></i> Liên hệ Email
+            </a>
+        </div>
+
+        <p class="footer-text">© 2026 Nguyễn Văn Khắc. All rights reserved.</p>
+    </div>
+
+    <!-- Đoạn Script kích hoạt hiệu ứng SweetAlert2 khi bấm vào Avatar -->
+    <script>
+        document.getElementById('avatarClick').addEventListener('click', function() {
+            Swal.fire({
+                title: 'Xin chào!',
+                text: 'Chào mừng bạn đã ghé thăm trang web của Nguyễn Văn Khắc!',
+                icon: 'success',
+                confirmButtonText: 'Tuyệt vời'
+            });
+        });
+    </script>
 
 </body>
 
